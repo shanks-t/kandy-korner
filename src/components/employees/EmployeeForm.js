@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom"
 export const EmployeeForm = () => {
     const [employee, updateEmployee] = useState({
         name: "",
-        storeId: "", 
+        storeId: 0, 
         manager: false,
         fullTime: false,
         hourlyRate: 0
@@ -15,7 +15,7 @@ export const EmployeeForm = () => {
         event.preventDefault()
         const newEmployee = {
             name: employee.name,
-            location: employee.location,
+            storeId: parseInt(employee.storeId),
             manager: employee.isManager,
             fullTime: employee.isFullTime,
             hourlyRate: employee.hourlyRate
@@ -71,6 +71,9 @@ export const EmployeeForm = () => {
                         }
                         required autoFocus
                         type="number"
+                        max="6"
+                        min="1"
+                        step="1"
                         className="form-control"
                         placeholder="address of store"
                          />
