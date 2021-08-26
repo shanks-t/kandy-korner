@@ -1,16 +1,14 @@
 import React from "react"
-import { LocationList } from "./locations/LocationList"
-import { ProductList } from "./products/ProductList"
+import { NavBar } from "./nav/NavBar"
+import { ApplicationViews } from "./ApplicationViews"
+import "./Kandy.css"
 
-export const Kandy = () => {
+export const KandyKorner = () => {
     return (
         <>
-
-            <h1>Kandy Korner</h1>
-            <LocationList />
-
-            <ProductList />
-            
-        </>
+                <NavBar />
+                <h1>Kandy's Candy Corner</h1>
+                <ApplicationViews />
+    </>
     )
 }
