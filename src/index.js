@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Kandy } from "./components/Kandy"
+import { BrowserRouter } from "react-router-dom"
+import { KandyKorner } from "./components/Kandy"
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Kandy />
+    <BrowserRouter>
+      <KandyKorner />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
