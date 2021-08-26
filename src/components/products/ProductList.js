@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react"
 
 export const ProductList = () => {
-    const [products, setproducts] = useState([])
+    const [products, setProducts] = useState([])
 
     useEffect(
         () => {
             fetch("http://localhost:8088/products?_expand=productType&_sort=price&_order=desc")
                 .then(res => res.json())
                 .then((data) => {
-                    setproducts(data)
+                    setProducts(data)
                 })
         },
         []
