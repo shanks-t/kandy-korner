@@ -20,8 +20,8 @@ export const Purchase = () => {
         <>
             <h2>Order {purchaseId} Details</h2>
             <section className="purchase">
-                <h3 className="purchase__productName">{ purchase.product.productName }</h3>
-                <div className="purchase__price">{ purchase.product.price }</div>
+                <h3 className="purchase__productName">{ purchase.product?.productName }</h3>
+                <div className="purchase__price">${ purchase.product?.price }</div>
             </section>
         </>
     )
