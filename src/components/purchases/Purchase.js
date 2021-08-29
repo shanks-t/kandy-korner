@@ -7,7 +7,7 @@ export const Purchase = () => {
 
     useEffect(
         () => {
-            return fetch(`http://localhost:8088/purchases/${purchaseId}?_expand=product`)
+            return fetch(`http://localhost:8088/purchases/${purchaseId}?_expand=product&_expand=customer`)
             .then(res => res.json())
             .then((data) => {
                 assignPurchase(data)
@@ -22,6 +22,7 @@ export const Purchase = () => {
             <section className="purchase">
                 <h3 className="purchase__productName">{ purchase.product?.productName }</h3>
                 <div className="purchase__price">${ purchase.product?.price }</div>
+                <div className="purchase__customer">{ purchase.customer?.name }</div>
             </section>
         </>
     )
