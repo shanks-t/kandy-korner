@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
+import { postFetch, getFetch } from "../ApiManager"
 import "./Login.css"
 
 export const Register = (props) => {
@@ -8,24 +9,25 @@ export const Register = (props) => {
 
     const history = useHistory()
 
-    const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/customers?email=${customer.email}`)
-            .then(res => res.json())
-            .then(user => !!user.length)
-    }
+    useEffect(
+        () => {
+            getFetch("http://localhost:8088/customers")
+                .then
+                    (user => !!user.length)   
+        },
+        []
+    )
+    // const existingUserCheck = () => {
+    //     return fetch(`http://localhost:8088/customers?email=${customer.email}`)
+    //         .then(res => res.json())
+    //         .then(user => !!user.length)
+    // }
     const handleRegister = (e) => {
         e.preventDefault()
-        existingUserCheck()
+        getFetch(`http://localhost:8088/customers?email=${customer.email}`)
             .then((userExists) => {
                 if (!userExists) {
-                    fetch("http://localhost:8088/customers", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(customer)
-                    })
-                        .then(res => res.json())
+                    postFetch("http://localhost:8088/customers", customer)
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 localStorage.setItem("kandy_customer", createdUser.id)

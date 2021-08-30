@@ -22,7 +22,7 @@ export const Login = () => {
         e.preventDefault()
         getFetch(`http://localhost:8088/customers?email=${email}`)
             .then(exists => {
-                debugger
+                
                 if (exists) {
                     localStorage.setItem("kandy_customer", exists[0].id)
                     history.push("/")
