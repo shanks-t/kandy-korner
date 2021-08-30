@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
+import { getAllCustomers } from "../ApiManager"
 import "./Login.css"
 
 export const Login = () => {
@@ -8,12 +9,14 @@ export const Login = () => {
     const existDialog = useRef()
     const history = useHistory()
 
-    const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/customers?email=${email}`)
-            .then(res => res.json())
-            .then(user => user.length ? user[0] : false)
-    }
-
+    useEffect(
+        () => {
+           getAllCustomers(`http://localhost:8088/customers?email=${email}`)
+                .then(user => user.length ? user[0] : false)
+                
+        },
+    [email]
+)
     const handleLogin = (e) => {
         e.preventDefault()
         existingUserCheck()

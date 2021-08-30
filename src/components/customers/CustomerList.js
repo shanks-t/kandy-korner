@@ -7,7 +7,7 @@ export const CustomerList = () => {
 
     useEffect(
         () => {
-           getAllCustomers()
+           getAllCustomers("http://localhost:8088/customers")
                 .then(
                     (customers) => {
                         setCustomers(customers)

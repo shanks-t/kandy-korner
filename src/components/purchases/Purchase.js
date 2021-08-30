@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { getPurchases } from "../ApiManager"
 
 export const Purchase = () => {
     const [ purchase, assignPurchase ] = useState({})
     const { purchaseId } = useParams()
 
+    // useEffect(
+    //     () => {
+    //         return fetch(`http://localhost:8088/purchases/${purchaseId}?_expand=product&_expand=customer`)
+    //         .then(res => res.json())
+    //         .then((data) => {
+    //             assignPurchase(data)
+    //         })
+    //     },
+    //     [ purchaseId ]
+    // )
     useEffect(
         () => {
-            return fetch(`http://localhost:8088/purchases/${purchaseId}?_expand=product&_expand=customer`)
-            .then(res => res.json())
-            .then((data) => {
-                assignPurchase(data)
-            })
+           getPurchases(`http://localhost:8088/purchases/${purchaseId}?_expand=product&_expand=customer`)
+                .then(
+                    (data) => {
+                        assignPurchase(data)
+                    }    
+                )
         },
-        [ purchaseId ]
+        [purchaseId]
     )
-
     return (
         <>
             <h2>Order {purchaseId} Details</h2>

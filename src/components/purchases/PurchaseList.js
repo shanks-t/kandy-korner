@@ -9,7 +9,7 @@ export const PurchaseList = () => {
 
     useEffect(
         () => {
-           getPurchases()
+           getPurchases("http://localhost:8088/purchases?_expand=product")
                 .then(
                     (purchases) => {
                         setPurchases(purchases)
