@@ -19,7 +19,7 @@ export const Login = () => {
 )
     const handleLogin = (e) => {
         e.preventDefault()
-        getFetch()
+        getFetch(`http://localhost:8088/customers?email=${email}`)
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("kandy_customer", exists.id)
