@@ -19,7 +19,7 @@ export const Login = () => {
 )
     const handleLogin = (e) => {
         e.preventDefault()
-        existingUserCheck()
+        getAllCustomers()
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("kandy_customer", exists.id)
