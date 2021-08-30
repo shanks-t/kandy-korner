@@ -22,3 +22,13 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin-bottom: 1.5em;
 }
+
+table, td, th {
+    width: 40%;
+    border: 1px solid black;
+    margin-left: 1rem;
+}
+
+tr, td {
+    text-align: center;
+}

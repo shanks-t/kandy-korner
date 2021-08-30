@@ -52,15 +52,23 @@ export const CustomerList = () => {
 
     return (
         <>
+        <table>
+            <tr>
+                <th>Customer</th>
+                <th>Candies Bought</th>
+            </tr>
             {
                 customers.map(
                     (customer) => {
-                        return <p key={`customer--${customer.id}`}>
-                        {customer.name} {countPurchases(customer.id)}
-                        </p>
+                        return <tr>
+                                <td>{customer.name}</td>
+                                <td>{countPurchases(customer.id)}</td>
+                            </tr>
+                        
                     }
                 )
             }
+        </table>
         </>
     )
 }
