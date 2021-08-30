@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
-import { getAllCustomers } from "../ApiManager"
+import { getFetch } from "../ApiManager"
 import "./Login.css"
 
 export const Login = () => {
@@ -11,15 +11,15 @@ export const Login = () => {
 
     useEffect(
         () => {
-           getAllCustomers(`http://localhost:8088/customers?email=${email}`)
+            getFetch(`http://localhost:8088/customers?email=${email}`)
                 .then(user => user.length ? user[0] : false)
                 
         },
-    [email]
+    []
 )
     const handleLogin = (e) => {
         e.preventDefault()
-        getAllCustomers()
+        getFetch()
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("kandy_customer", exists.id)

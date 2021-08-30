@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getPurchases } from "../ApiManager"
+import { getFetch } from "../ApiManager"
 
 export const Purchase = () => {
     const [ purchase, assignPurchase ] = useState({})
     const { purchaseId } = useParams()
-
-    // useEffect(
-    //     () => {
-    //         return fetch(`http://localhost:8088/purchases/${purchaseId}?_expand=product&_expand=customer`)
-    //         .then(res => res.json())
-    //         .then((data) => {
-    //             assignPurchase(data)
-    //         })
-    //     },
-    //     [ purchaseId ]
-    // )
+    console.log(purchaseId)
+   
     useEffect(
         () => {
-           getPurchases(`http://localhost:8088/purchases/${purchaseId}?_expand=product&_expand=customer`)
-                .then(
-                    (data) => {
-                        assignPurchase(data)
-                    }    
-                )
+            return fetch(`http://localhost:8088/purchases/${purchaseId}`)
+            .then(res => res.json())
+            .then((data) => {
+                assignPurchase(data)
+            })
         },
-        [purchaseId]
+        [ purchaseId ]
     )
+    // useEffect(
+    //     () => {
+            
+    //        getPurchases(`http://localhost:8088/purchases/${purchaseId}?_expand=product&_expand=customer`)
+    //             .then(
+    //                 (data) => {
+    //                     assignPurchase(data)
+    //                 }    
+    //             )
+    //     },
+    //     [purchaseId]
+    // )
+
     return (
         <>
             <h2>Order {purchaseId} Details</h2>

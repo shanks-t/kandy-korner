@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { getPurchases } from "../ApiManager"
+import { getFetch } from "../ApiManager"
 
 
 export const PurchaseList = () => {
@@ -9,7 +9,7 @@ export const PurchaseList = () => {
 
     useEffect(
         () => {
-           getPurchases("http://localhost:8088/purchases?_expand=product")
+            getFetch("http://localhost:8088/purchases?_expand=product")
                 .then(
                     (purchases) => {
                         setPurchases(purchases)

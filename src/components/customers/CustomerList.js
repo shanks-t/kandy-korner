@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { getAllCustomers } from "../ApiManager"
+import { getFetch } from "../ApiManager"
 
 
 export const CustomerList = () => {
@@ -7,7 +7,7 @@ export const CustomerList = () => {
 
     useEffect(
         () => {
-           getAllCustomers("http://localhost:8088/customers")
+            getFetch("http://localhost:8088/customers")
                 .then(
                     (customers) => {
                         setCustomers(customers)
