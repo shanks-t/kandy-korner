@@ -4,6 +4,7 @@ import { getFetch } from "../ApiManager"
 
 export const CustomerList = () => {
     const [customers, setCustomers] = useState([])
+    const [purchases, setPurchases] = useState([])
 
     useEffect(
         () => {
@@ -16,7 +17,32 @@ export const CustomerList = () => {
         },
         []
     )
+    useEffect(
+        () => {
+            getFetch("http://localhost:8088/purchases")
+                .then(
+                    (purchases) => {
+                        setPurchases(purchases)
+                    }    
+                )
+        },
+        []
+    )
+    const countPurchases =  (id) => {
+        let count = 0
+            for (const purchase of purchases) {
+                if (id === purchase.customerId) {
+                    count++
+                }
+            }
+        return count
+    }
+    useEffect(
+        () => {
 
+        },
+        [purchases]
+    )
     useEffect(
         () => {
 
@@ -30,7 +56,7 @@ export const CustomerList = () => {
                 customers.map(
                     (customer) => {
                         return <p key={`customer--${customer.id}`}>
-                        {customer.name} 
+                        {customer.name} {countPurchases(customer.id)}
                         </p>
                     }
                 )
