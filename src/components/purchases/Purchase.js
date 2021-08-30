@@ -5,30 +5,16 @@ import { getFetch } from "../ApiManager"
 export const Purchase = () => {
     const [ purchase, assignPurchase ] = useState({})
     const { purchaseId } = useParams()
-    console.log(purchaseId)
-   
+
     useEffect(
         () => {
-            return fetch(`http://localhost:8088/purchases/${purchaseId}`)
-            .then(res => res.json())
+           getFetch(`http://localhost:8088/purchases/${purchaseId}?_expand=product&_expand=customer`)
             .then((data) => {
                 assignPurchase(data)
             })
         },
         [ purchaseId ]
     )
-    // useEffect(
-    //     () => {
-            
-    //        getPurchases(`http://localhost:8088/purchases/${purchaseId}?_expand=product&_expand=customer`)
-    //             .then(
-    //                 (data) => {
-    //                     assignPurchase(data)
-    //                 }    
-    //             )
-    //     },
-    //     [purchaseId]
-    // )
 
     return (
         <>

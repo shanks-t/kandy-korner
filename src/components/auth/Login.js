@@ -18,11 +18,13 @@ export const Login = () => {
     []
 )
     const handleLogin = (e) => {
+        
         e.preventDefault()
         getFetch(`http://localhost:8088/customers?email=${email}`)
             .then(exists => {
+                debugger
                 if (exists) {
-                    localStorage.setItem("kandy_customer", exists.id)
+                    localStorage.setItem("kandy_customer", exists[0].id)
                     history.push("/")
                 } else {
                     existDialog.current.showModal()

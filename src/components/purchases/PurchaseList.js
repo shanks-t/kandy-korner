@@ -32,7 +32,7 @@ export const PurchaseList = () => {
                 purchases.map(
                     (purchase) => {
                         return <p key={`purchase--${purchase.id}`}>
-                        {purchase.productId} <Link to={`/purchases=/${purchase.id}`}>{purchase.product.productName}</Link> {purchase.product.price}
+                        {purchase.productId} <Link to={`/purchases/${purchase.id}`}>{purchase.product.productName}</Link> {purchase.product.price}
                         </p>
                     }
                 )
