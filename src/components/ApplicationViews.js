@@ -7,6 +7,8 @@ import { EmployeeForm } from "./employees/EmployeeForm"
 import { CustomerList } from "./customers/CustomerList"
 import { PurchaseList } from "./purchases/PurchaseList"
 import { Purchase } from "./purchases/Purchase"
+import { Customer } from "./customers/Customer"
+
 export const ApplicationViews = () => {
     return (
         <>
@@ -28,6 +30,10 @@ export const ApplicationViews = () => {
 
             <Route exact path="/customers">
                 <CustomerList />
+            </Route>
+
+            <Route exact path="/customers/:customerId(\d+)">
+                <Customer />
             </Route>
 
             <Route exact path="/employees">
