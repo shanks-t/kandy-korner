@@ -67,12 +67,11 @@ export const Customer = () => {
             {
                 purchasesForCustomer
                 .reduce((prev, curr) => {
-                    let count = curr[prev]
                     if(curr.id in prev) {
                         prev++
                     } else {
                         prev[curr.id] = 1
-                    }  return count
+                    }  return prev
                 },{}
                 )
                  .map(
