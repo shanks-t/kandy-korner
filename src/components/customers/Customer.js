@@ -27,10 +27,10 @@ export const Customer = () => {
 
     useEffect(
         () => {
-
+            console.log("array: ", purchasesForCustomer)
         },
         [purchasesForCustomer],
-        console.log("array: ", purchasesForCustomer)
+        
     )
 
     // useEffect(
@@ -66,24 +66,26 @@ export const Customer = () => {
             </tr>
             {
                 purchasesForCustomer
-                .reduce((prev, curr) => {
-                    if(curr.id in prev) {
-                        prev++
-                    } else {
-                        prev[curr.id] = 1
-                    }  return prev
-                },{}
+                .map(
+                (purchase) => <tr>
+                    <td>{purchase.product?.productName}</td>
+                    <td>{purchase.product?.prev}</td>
+                    <td>{purchase.product?.price}</td>
+                </tr>
                 )
-                 .map(
-                    (purchase) => <tr>
-                        <td>{purchase.product?.productName}</td>
-                        <td>{purchase.product?.prev}</td>
-                        <td>{purchase.product?.price}</td>
-                    </tr>
-                )
+
             }
                 </table>
             </section>
         </>
     )
 }
+
+
+// .reduce((prev, curr) => {
+//     if(curr.id in prev) {
+//         prev++
+//     } else {
+//         prev[curr.id] = 1
+// } return prev
+// },{})
