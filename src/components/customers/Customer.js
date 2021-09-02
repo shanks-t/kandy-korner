@@ -4,7 +4,7 @@ import { getFetch } from "../ApiManager"
 
 
 export const Customer = () => {
-    //const [purchases, setPurchases] = useState([])
+    const [reducedArr, setReducedArr] = useState([])
     const [purchasesForCustomer, setpurchasesForCustomer] = useState([])
     const { customerId } = useParams()
 
@@ -13,7 +13,7 @@ export const Customer = () => {
            getFetch(`http://localhost:8088/purchases?customerId=${customerId}&_expand=product&_expand=customer`)
             .then((data) => {
                 setpurchasesForCustomer(data)
-                console.log(data)
+                console.log("purchasesForCustomer:", data)
             })
             // .then(getFetch("http://localhost:8088/purchases")
             // .then(
@@ -27,12 +27,23 @@ export const Customer = () => {
 
     useEffect(
         () => {
-
+            setReducedArr(countedPurchases(purchasesForCustomer, "productId"))
         },
-        [purchasesForCustomer],
-        console.log("array: ", purchasesForCustomer)
+        [purchasesForCustomer]
     )
 
+    const countedPurchases = (objectArray, property) => {
+        return objectArray.reduce(function (acc, obj) {
+            let key = obj[property]
+        if(!acc[key]) {
+             acc[key] = [obj]
+        } else {
+         acc[key].push(obj)
+        }  return acc
+    }, [])
+    
+ }
+  
     // useEffect(
     //     () => {
     //         purchases.map(
@@ -63,24 +74,18 @@ export const Customer = () => {
                 <th>Candy</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                {console.log("reduced:", reducedArr)}
             </tr>
-            {
-                purchasesForCustomer
-                .reduce((prev, curr) => {
-                    if(curr.id in prev) {
-                        prev++
-                    } else {
-                        prev[curr.id] = 1
-                    }  return prev
-                },{}
-                )
-                 .map(
-                    (purchase) => <tr>
-                        <td>{purchase.product?.productName}</td>
-                        <td>{purchase.product?.prev}</td>
-                        <td>{purchase.product?.price}</td>
+            {reducedArr
+                 .map(function (nested) {
+                     return nested.map(function (purchase) {
+                         return <tr>
+                        <td>{nested.product?.productName}</td>
+                        <td>{nested.length}</td>
+                        <td>dunno</td>
                     </tr>
-                )
+                     })
+                 })
             }
                 </table>
             </section>
