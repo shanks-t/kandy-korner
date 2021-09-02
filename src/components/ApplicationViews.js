@@ -8,6 +8,7 @@ import { CustomerList } from "./customers/CustomerList"
 import { PurchaseList } from "./purchases/PurchaseList"
 import { Purchase } from "./purchases/Purchase"
 import { Customer } from "./customers/Customer"
+import { InventoryList } from "./inventory/InventoryList"
 
 export const ApplicationViews = () => {
     return (
@@ -43,6 +44,12 @@ export const ApplicationViews = () => {
             <Route path="/employees/create">
                 <EmployeeForm />
             </Route>
+            
+            <Route path="/inventory/InventoryList">
+                <InventoryList />
+            </Route>
+
+            
         </>
     )
 }

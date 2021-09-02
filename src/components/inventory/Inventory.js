@@ -1,6 +1,20 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { InventorySearch } from "./InventorySearch"
 
 export const Inventory = () => {
-    const [searchTerm, updateSearchTerm] = useState()
+ const [searchTerm, setSearchTerm] = useState()
     
+
+    useEffect(() => {
+ 
+    }, [searchTerm]
+)
+
+return (
+    <>
+        <InventorySearch func={setSearchTerm()} />
+        {/* <InventoryList someAttribute={} /> */}
+    </>
+)
+
 }
