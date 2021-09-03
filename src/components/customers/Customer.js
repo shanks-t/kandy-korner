@@ -15,12 +15,6 @@ export const Customer = () => {
                 setpurchasesForCustomer(data)
                 console.log("purchasesForCustomer:", data)
             })
-            // .then(getFetch("http://localhost:8088/purchases")
-            // .then(
-            //     (purchases) => {
-            //         setPurchases(purchases)
-            //     }    
-            // ))
         },
         [ customerId ]
     )
@@ -57,24 +51,6 @@ export const Customer = () => {
         }
           return count;
         }
-    // useEffect(
-    //     () => {
-    //         purchases.map(
-    //             (purchase) => {
-    //                 return filterCustomerPurchases(purchasesForCustomer)
-    //             }
-    //         )
-    //     },
-    //     [purchases]
-    // )
-
-    // const filterCustomerPurchases = () => {
-    //     const customerPurchases = purchases.filter(
-    //     (purchase) =>  purchase.customerId.includes(customerId)
-    //     )
-    //     setpurchasesForCustomer(customerPurchases)
-    // }
-
 
 
     return (
