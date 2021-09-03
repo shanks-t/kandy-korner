@@ -27,23 +27,36 @@ export const Customer = () => {
 
     useEffect(
         () => {
-            setReducedArr(countedPurchases(purchasesForCustomer, "productId"))
+            setReducedArr(combineProducts(purchasesForCustomer))
         },
         [purchasesForCustomer]
     )
 
-    const countedPurchases = (objectArray, property) => {
-        return objectArray.reduce(function (acc, obj) {
-            let key = obj[property]
-        if(!acc[key]) {
-             acc[key] = [obj]
-        } else {
-         acc[key].push(obj)
-        }  return acc
-    }, [])
-    
- }
+    const combineProducts = (arr) => {
+        const uniqueProducts = []
+        arr.forEach((product) => {
+            
+          const hasProduct = !!uniqueProducts.find((uniqueProduct) => (
+            uniqueProduct.productId === product.productId
+          ));
+      
+          if (!hasProduct) {
+            uniqueProducts.push(product)
+
+          }
+        })
+        return uniqueProducts;
+      }
   
+    const countInstances = (id) => {
+        let count = 0
+        for (const purchase of purchasesForCustomer) {
+            if (purchase.productId === id){
+                count++
+            }
+        }
+          return count;
+        }
     // useEffect(
     //     () => {
     //         purchases.map(
@@ -77,15 +90,14 @@ export const Customer = () => {
                 {console.log("reduced:", reducedArr)}
             </tr>
             {reducedArr
-                 .map(function (nested) {
-                     return nested.map(function (purchase) {
-                         return <tr>
-                        <td>{nested.product?.productName}</td>
-                        <td>{nested.length}</td>
-                        <td>dunno</td>
-                    </tr>
-                     })
-                 })
+                 .map(
+                      (purchase) =>
+                         <tr>
+                            <td>{purchase.product.productName}</td>
+                            <td>{countInstances(purchase.productId)}</td>
+                            <td>{purchase.product.price * countInstances(purchase.productId)}</td>
+                        </tr>
+                     )
             }
                 </table>
             </section>
