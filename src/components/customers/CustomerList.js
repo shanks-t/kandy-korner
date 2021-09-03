@@ -7,16 +7,7 @@ export const CustomerList = () => {
     const [purchases, setPurchases] = useState([])
     const [customersWithPurchases, setCustomersWithPurchases] = useState([])
     
-    const createLineItem = () => {
 
-    }
-
-    useEffect(
-        () => {
-            
-        },
-        []
-    )
     useEffect(
         () => {
             getFetch("http://localhost:8088/purchases")

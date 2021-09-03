@@ -19,28 +19,35 @@ export const Customer = () => {
         [ customerId ]
     )
 
-    useEffect(
-        () => {
-            setReducedArr(combineProducts(purchasesForCustomer))
-        },
-        [purchasesForCustomer]
-    )
-
-    const combineProducts = (arr) => {
-        const uniqueProducts = []
-        arr.forEach((product) => {
+    // useEffect(
+    //     () => {
+    //         setReducedArr(reduceProducts(purchasesForCustomer))
+    //         console.log("reduced:", reducedArr)
+    //     },
+    //     [purchasesForCustomer]
+    // )
+    // useEffect(
+    //     () => {
             
-          const hasProduct = !!uniqueProducts.find((uniqueProduct) => (
-            uniqueProduct.productId === product.productId
-          ));
-      
-          if (!hasProduct) {
-            uniqueProducts.push(product)
+    //         console.log("reduced:", reducedArr)
+    //     },
+    //     [reducedArr]
+    // )
 
-          }
-        })
-        return uniqueProducts;
-      }
+    // const reduceProducts = (arr) => {
+    //   return arr.reduce((acc, product) => { 
+    //         const hasProduct = !!acc.find((uniqueProduct) => (
+    //           uniqueProduct.productId === product.productId
+    //         ));
+        
+    //         if (!hasProduct) {
+    //           return [ ...acc, product ]
+    //         }
+        
+    //         return acc;
+    //       }, [])
+    //     }
+      
   
     const countInstances = (id) => {
         let count = 0
@@ -63,9 +70,17 @@ export const Customer = () => {
                 <th>Candy</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                {console.log("reduced:", reducedArr)}
             </tr>
-            {reducedArr
+            {purchasesForCustomer
+            .reduce((acc, product) => { 
+                const hasProduct = !!acc.find((uniqueProduct) => (
+                uniqueProduct.productId === product.productId
+                ));
+                if (!hasProduct) {
+                return [ ...acc, product ]
+                }
+                return acc;
+          }, [])
                  .map(
                       (purchase) =>
                          <tr>
