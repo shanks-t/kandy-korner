@@ -1,21 +1,12 @@
 import React from "react"
 
 
+export const InventorySearch = ({getSearchTerm}) => (
 
-
-
-export const InventorySearch = (func) => (
-    <form action="/" method="get">
-        <label htmlFor="header-search">
-            <span className="visually-hidden">Search Inventory...</span>
-        </label>
-        <input
-            type="text"
-            id="header-search"
-            placeholder="Search Inventory"
-            onChange = {(e) => {
-                func(e.target.value)}} 
-        />
-        <button type="submit">Search</button>
-    </form>
+<div className="inventory_search">
+        <input type="text" 
+            placeholder="Search Inventory" 
+            onChange={e => {getSearchTerm(e.target.value); console.log("e.target.value: ", e.target.value)}
+            }/>
+</div>
 )

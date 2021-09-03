@@ -8,7 +8,7 @@ import { CustomerList } from "./customers/CustomerList"
 import { PurchaseList } from "./purchases/PurchaseList"
 import { Purchase } from "./purchases/Purchase"
 import { Customer } from "./customers/Customer"
-import { InventoryList } from "./inventory/InventoryList"
+import { Inventory } from "./inventory/Inventory"
 
 export const ApplicationViews = () => {
     return (
@@ -45,8 +45,8 @@ export const ApplicationViews = () => {
                 <EmployeeForm />
             </Route>
             
-            <Route path="/inventory/InventoryList">
-                <InventoryList />
+            <Route path="/inventory/Inventory">
+                <Inventory />
             </Route>
 
             

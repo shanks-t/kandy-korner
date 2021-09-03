@@ -1,9 +1,9 @@
 import  { useEffect, useState } from "react"
 
 
-export const InventoryList = () => {
-const [inventory, setInventory] = useState([{}])
-const [searchTerm, setSearchTerm] = useState("")
+export const InventoryList = ({stateToFilter}) => {
+const [inventory, setInventory] = useState([])
+const [filteredArr, setFilteredArr] = useState([])
 
 
     useEffect(
@@ -16,24 +16,38 @@ const [searchTerm, setSearchTerm] = useState("")
         },
         []
     )
-
-
+    useEffect(
+        () => {
+            filterArray(inventory)
+            console.log("stateToFilter: ", stateToFilter)
+        },
+        [stateToFilter]
+    )
+    useEffect(
+        () => {
+        
+            console.log("filteredArray: ", filteredArr)
+        },
+        [filteredArr]
+    )
+   const filterArray = (arr) => {
+      const filteredArr =  arr.filter((val) => {
+          
+            if (stateToFilter === "") {
+                return val
+            } else if (val.productName.toLowerCase().includes(stateToFilter.toLowerCase())) {
+                return val
+            }
+            }
+        )
+        setFilteredArr(filteredArr)
+    }
+     
+     
 
     return (
-        <div className="inventory_search">
-            <input type="text" 
-            placeholder="Search Inventory" 
-            onChange={(e) => setSearchTerm(e.target.value)
-            }/>
-            {inventory.filter((val) => {
-                if (searchTerm === "") {
-                    return val
-                } else if (val.productName.toLowerCase().includes(searchTerm.toLowerCase())) {
-                    return val
-                }
-                }
-            )
-            .map(
+        <>
+        {  filteredArr.map(
                 (item) => {
                     return <div className="iventory_item"> 
                         <p>
@@ -41,7 +55,8 @@ const [searchTerm, setSearchTerm] = useState("")
                         </p> 
                     </div>
                 }
-            )}
-        </div>
+            )
+        }
+        </>
     )
 }
